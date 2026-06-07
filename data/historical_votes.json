@@ -1,0 +1,304 @@
+[
+  {
+    "year": 2002,
+    "limit_hit_date": "2002-02-20",
+    "x_date": "2002-06-28",
+    "vote_date": "2002-06-28",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "R",
+      "house": "R",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": -0.018740820709923334,
+    "spx_return_15d_after": -0.06913377398863463,
+    "tlt_return_15d_before": 0.0019767703441691434,
+    "tlt_return_15d_after": 0.004747099858342586,
+    "dgs10_change_bps_15d_before": -9.70001220703125,
+    "dgs10_change_bps_15d_after": -22.900009155273438,
+    "vix_change_15d_before": 0.050759409853231796
+  },
+  {
+    "year": 2003,
+    "limit_hit_date": "2003-02-20",
+    "x_date": "2003-05-27",
+    "vote_date": "2003-05-27",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "R",
+      "house": "R",
+      "senate": "R"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": -0.012580561873986151,
+    "spx_return_15d_after": 0.04834573605777592,
+    "tlt_return_15d_before": 0.05156166314550137,
+    "tlt_return_15d_after": 0.02193465808144235,
+    "dgs10_change_bps_15d_before": -30.59999942779541,
+    "dgs10_change_bps_15d_after": -21.30000591278076,
+    "vix_change_15d_before": -0.017930346990874257
+  },
+  {
+    "year": 2008,
+    "limit_hit_date": "2008-03-05",
+    "x_date": "2008-07-30",
+    "vote_date": "2008-07-30",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "R",
+      "house": "D",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": 0.03974773080608651,
+    "spx_return_15d_after": 0.006751003596923377,
+    "tlt_return_15d_before": -0.024316917176262387,
+    "tlt_return_15d_after": 0.01988889269604921,
+    "dgs10_change_bps_15d_before": 20.000004768371582,
+    "dgs10_change_bps_15d_after": -15.599989891052246,
+    "vix_change_15d_before": -0.22810091170459756
+  },
+  {
+    "year": 2010,
+    "limit_hit_date": "2010-02-04",
+    "x_date": "2010-08-02",
+    "vote_date": "2010-02-12",
+    "days_to_deadline": 171,
+    "party_control": {
+      "president": "D",
+      "house": "D",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": -0.005587727799182152,
+    "spx_return_15d_after": 0.026945337751961285,
+    "tlt_return_15d_before": -0.014999779575106786,
+    "tlt_return_15d_after": 0.01640988559833856,
+    "dgs10_change_bps_15d_before": 7.500004768371582,
+    "dgs10_change_bps_15d_after": -9.800004959106445,
+    "vix_change_15d_before": 0.009692353420696742
+  },
+  {
+    "year": 2011,
+    "limit_hit_date": "2011-05-16",
+    "x_date": "2011-08-02",
+    "vote_date": "2011-08-02",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "D",
+      "house": "R",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": -0.01417146772763167,
+    "spx_return_15d_after": -0.04797259426440392,
+    "tlt_return_15d_before": 0.03851662456525018,
+    "tlt_return_15d_after": 0.064506716413679,
+    "dgs10_change_bps_15d_before": -16.899991035461426,
+    "dgs10_change_bps_15d_after": -45.90001106262207,
+    "vix_change_15d_before": 0.1293555601805345
+  },
+  {
+    "year": 2013,
+    "limit_hit_date": "2013-05-19",
+    "x_date": "2013-10-17",
+    "vote_date": "2013-10-17",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "D",
+      "house": "R",
+      "senate": "D"
+    },
+    "resolution_type": "suspend_cr",
+    "spx_return_15d_before": 0.016335400015984325,
+    "spx_return_15d_after": 0.016438271259296755,
+    "tlt_return_15d_before": -0.0010382991885022896,
+    "tlt_return_15d_after": -0.003136948344138357,
+    "dgs10_change_bps_15d_before": 4.500007629394531,
+    "dgs10_change_bps_15d_after": 3.299999237060547,
+    "vix_change_15d_before": -0.11385543975243073
+  },
+  {
+    "year": 2014,
+    "limit_hit_date": "2014-03-15",
+    "x_date": "2014-10-17",
+    "vote_date": "2014-02-15",
+    "days_to_deadline": 244,
+    "party_control": {
+      "president": "D",
+      "house": "R",
+      "senate": "D"
+    },
+    "resolution_type": "suspend",
+    "spx_return_15d_before": 0.03143742539620509,
+    "spx_return_15d_after": 0.010153383008700612,
+    "tlt_return_15d_before": -0.01318404147500818,
+    "tlt_return_15d_after": 0.016382954704778907,
+    "dgs10_change_bps_15d_before": 7.800006866455078,
+    "dgs10_change_bps_15d_after": -5.299997329711914,
+    "vix_change_15d_before": -0.26290060796867676
+  },
+  {
+    "year": 2015,
+    "limit_hit_date": "2015-03-16",
+    "x_date": "2015-11-03",
+    "vote_date": "2015-11-02",
+    "days_to_deadline": 1,
+    "party_control": {
+      "president": "D",
+      "house": "R",
+      "senate": "R"
+    },
+    "resolution_type": "suspend",
+    "spx_return_15d_before": 0.022471835249799454,
+    "spx_return_15d_after": -0.02547948298650682,
+    "tlt_return_15d_before": -0.006554203143061876,
+    "tlt_return_15d_after": -0.01787620509301735,
+    "dgs10_change_bps_15d_before": 12.2999906539917,
+    "dgs10_change_bps_15d_after": 7.399988174438477,
+    "vix_change_15d_before": 0.006008021050610379
+  },
+  {
+    "year": 2017,
+    "limit_hit_date": "2017-03-16",
+    "x_date": "2017-11-01",
+    "vote_date": "2017-09-08",
+    "days_to_deadline": 54,
+    "party_control": {
+      "president": "R",
+      "house": "R",
+      "senate": "R"
+    },
+    "resolution_type": "suspend_cr",
+    "spx_return_15d_before": 0.010713591092551322,
+    "spx_return_15d_after": 0.016571684019179855,
+    "tlt_return_15d_before": 0.02141587820323454,
+    "tlt_return_15d_after": -0.02170540496320672,
+    "dgs10_change_bps_15d_before": -13.299989700317383,
+    "dgs10_change_bps_15d_after": 20.099997520446777,
+    "vix_change_15d_before": -0.05560093024967705
+  },
+  {
+    "year": 2018,
+    "limit_hit_date": "2018-03-02",
+    "x_date": "2018-03-15",
+    "vote_date": "2018-02-09",
+    "days_to_deadline": 34,
+    "party_control": {
+      "president": "R",
+      "house": "R",
+      "senate": "R"
+    },
+    "resolution_type": "suspend",
+    "spx_return_15d_before": -0.09095711895747116,
+    "spx_return_15d_after": 0.04876791724485274,
+    "tlt_return_15d_before": -0.041216380524337515,
+    "tlt_return_15d_after": 0.0016104074572156346,
+    "dgs10_change_bps_15d_before": 23.000001907348633,
+    "dgs10_change_bps_15d_after": 4.200005531311035,
+    "vix_change_15d_before": 1.8894645341037397
+  },
+  {
+    "year": 2019,
+    "limit_hit_date": "2019-03-02",
+    "x_date": "2019-09-01",
+    "vote_date": "2019-08-02",
+    "days_to_deadline": 30,
+    "party_control": {
+      "president": "R",
+      "house": "D",
+      "senate": "R"
+    },
+    "resolution_type": "suspend",
+    "spx_return_15d_before": -0.013872628163206446,
+    "spx_return_15d_after": -0.014791738362322282,
+    "tlt_return_15d_before": 0.026736678721561935,
+    "tlt_return_15d_after": 0.0704705107424064,
+    "dgs10_change_bps_15d_before": -14.400005340576172,
+    "dgs10_change_bps_15d_after": -31.599998474121094,
+    "vix_change_15d_before": 0.3207687503264378
+  },
+  {
+    "year": 2021,
+    "limit_hit_date": "2021-08-01",
+    "x_date": "2021-10-18",
+    "vote_date": "2021-10-14",
+    "days_to_deadline": -4,
+    "party_control": {
+      "president": "D",
+      "house": "D",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "event_id": "2021_oct",
+    "spx_return_15d_before": 0.0009955003117099182,
+    "spx_return_15d_after": 0.03765442448454026,
+    "tlt_return_15d_before": 0.0082065315424531,
+    "tlt_return_15d_after": 0.012407203739345674,
+    "dgs10_change_bps_15d_before": 0.8000016212463379,
+    "dgs10_change_bps_15d_after": 3.7999987602233887,
+    "vix_change_15d_before": -0.17375887274340407
+  },
+  {
+    "year": 2021,
+    "limit_hit_date": "2021-10-18",
+    "x_date": "2021-12-15",
+    "vote_date": "2021-12-16",
+    "days_to_deadline": -1,
+    "party_control": {
+      "president": "D",
+      "house": "D",
+      "senate": "D"
+    },
+    "resolution_type": "increase",
+    "event_id": "2021_dec",
+    "spx_return_15d_before": 0.043609198431714624,
+    "spx_return_15d_after": 0.02088608865864927,
+    "tlt_return_15d_before": -0.020283275132051637,
+    "tlt_return_15d_after": -0.006369846193114648,
+    "dgs10_change_bps_15d_before": 2.9000043869018555,
+    "dgs10_change_bps_15d_after": 8.999991416931152,
+    "vix_change_15d_before": -0.38014137547168114
+  },
+  {
+    "year": 2023,
+    "limit_hit_date": "2023-01-19",
+    "x_date": "2023-06-05",
+    "vote_date": "2023-06-03",
+    "days_to_deadline": 2,
+    "party_control": {
+      "president": "D",
+      "house": "R",
+      "senate": "D"
+    },
+    "resolution_type": "suspend",
+    "spx_return_15d_before": 0.021562635589839507,
+    "spx_return_15d_after": 0.03177502952795708,
+    "tlt_return_15d_before": 0.01148463651826459,
+    "tlt_return_15d_after": 0.007858427500084808,
+    "dgs10_change_bps_15d_before": -0.09999275207519531,
+    "dgs10_change_bps_15d_after": 7.599997520446777,
+    "vix_change_15d_before": -0.13146931318767663
+  },
+  {
+    "year": 2025,
+    "limit_hit_date": "2025-01-02",
+    "x_date": "2025-07-04",
+    "vote_date": "2025-07-04",
+    "days_to_deadline": 0,
+    "party_control": {
+      "president": "R",
+      "house": "R",
+      "senate": "R"
+    },
+    "resolution_type": "increase",
+    "spx_return_15d_before": 0.05219815914337733,
+    "spx_return_15d_after": 0.010723960398460797,
+    "tlt_return_15d_before": 0.009300839103757008,
+    "tlt_return_15d_after": -0.010448102161845552,
+    "dgs10_change_bps_15d_before": -2.6999950408935547,
+    "dgs10_change_bps_15d_after": 3.7000179290771484,
+    "vix_change_15d_before": -0.20562567923854802
+  }
+]

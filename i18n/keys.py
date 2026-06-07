@@ -1,0 +1,7 @@
+OVERVIEW = "overview"
+TIMELINE = "timeline"
+MARKET = "market"
+DAILY = "daily"
+SCENARIO = "scenario"
+WEIGHTS = "weights"
+HISTORY = "history"

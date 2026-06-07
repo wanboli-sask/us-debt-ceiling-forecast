@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "美国债务上限预测",
+    "subtitle": "2027年预测仪表盘"
+  },
+  "nav": {
+    "overview": "总览",
+    "timeline": "时间线",
+    "market": "市场预测",
+    "daily": "每日报告",
+    "scenario": "情景模拟",
+    "weights": "模型权重",
+    "history": "历史对照",
+    "backtest": "回测验证"
+  },
+  "overview": {
+    "xdate": "违约风险日",
+    "countdown": "距X-date天数",
+    "sentiment": "情绪指数",
+    "risk": "风险等级",
+    "delta": "预测变动",
+    "limit_hit": "触及债务上限",
+    "final_vote": "最终投票（预估）",
+    "vix": "VIX恐慌指数",
+    "vix_level": "恐慌等级"
+  },
+  "risk": {
+    "low": "低",
+    "medium": "中",
+    "high": "高",
+    "extreme": "极端"
+  },
+  "market": {
+    "pre_vote": "投票前15日",
+    "post_vote": "投票后15日",
+    "cumulative": "累计收益区间",
+    "spx": "标普500",
+    "tlt": "美债ETF",
+    "dgs10": "10年期收益率(bps)",
+    "vix": "恐慌指数",
+    "vix_chart": "VIX走势"
+  },
+  "weights": {
+    "mode": "权重模式",
+    "auto": "自动",
+    "manual": "手动",
+    "hybrid": "混合",
+    "blend": "用户覆盖比例",
+    "historical": "历史KNN",
+    "sentiment": "情绪修正",
+    "microstructure": "微观结构",
+    "reset": "恢复默认",
+    "lock": "锁定权重",
+    "evolution": "权重演变"
+  },
+  "disclaimer": {
+    "en": "This tool provides statistical model forecasts, not investment advice.",
+    "zh": "本工具为统计模型预测，非投资建议。"
+  },
+  "common": {
+    "run_update": "运行每日更新",
+    "loading": "加载数据中..."
+  }
+}

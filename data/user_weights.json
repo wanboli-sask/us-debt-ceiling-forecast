@@ -1,0 +1,15 @@
+{
+  "mode": "auto",
+  "hybrid_blend": 0.0,
+  "locked": false,
+  "weights": {
+    "historical": 0.4,
+    "sentiment": 0.35,
+    "microstructure": 0.25
+  },
+  "ai_weights": {
+    "historical": 0.44428820190556817,
+    "sentiment": 0.3873083960289201,
+    "microstructure": 0.16840340206551177
+  }
+}

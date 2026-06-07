@@ -1,0 +1,51 @@
+{
+  "limit_hit_date": "2027-03-15",
+  "limit_hit_range": [
+    "2027-02-15",
+    "2027-06-30"
+  ],
+  "x_date": "2027-10-01",
+  "x_date_range": [
+    "2027-09-01",
+    "2027-11-15"
+  ],
+  "final_vote_date": "2027-09-28",
+  "final_vote_range": [
+    "2027-09-15",
+    "2027-10-10"
+  ],
+  "vote_windows": [
+    {
+      "id": "q1_procedural",
+      "start": "2027-02-20",
+      "end": "2027-03-15",
+      "probability": 0.15,
+      "rationale_en": "Early-year budget resolution / procedural votes",
+      "rationale_zh": "\u5e74\u521d\u9884\u7b97\u51b3\u8bae/\u7a0b\u5e8f\u6027\u6295\u7968"
+    },
+    {
+      "id": "midyear_temp",
+      "start": "2027-06-15",
+      "end": "2027-07-31",
+      "probability": 0.2,
+      "rationale_en": "Mid-year warning temporary measure",
+      "rationale_zh": "\u4e2d\u671f\u8b66\u544a\u6027\u4e34\u65f6\u65b9\u6848"
+    },
+    {
+      "id": "fall_brinkmanship",
+      "start": "2027-09-15",
+      "end": "2027-10-10",
+      "probability": 0.55,
+      "rationale_en": "Last-week legislation near X-date",
+      "rationale_zh": "\u8dddX-date\u6700\u540e\u4e00\u5468\u7acb\u6cd5"
+    },
+    {
+      "id": "post_default",
+      "start": "2027-10-15",
+      "end": "2027-11-30",
+      "probability": 0.1,
+      "rationale_en": "Emergency legislation after default scenario",
+      "rationale_zh": "\u8fdd\u7ea6\u540e\u7d27\u6025\u7acb\u6cd5"
+    }
+  ]
+}

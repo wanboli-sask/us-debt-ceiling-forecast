@@ -1,0 +1,64 @@
+{
+  "app": {
+    "title": "US Debt Ceiling Forecast",
+    "subtitle": "2027 Prediction Dashboard"
+  },
+  "nav": {
+    "overview": "Overview",
+    "timeline": "Timeline",
+    "market": "Market Forecast",
+    "daily": "Daily Report",
+    "scenario": "Scenario Simulator",
+    "weights": "Model Weights",
+    "history": "Historical Cases",
+    "backtest": "Backtest Validation"
+  },
+  "overview": {
+    "xdate": "X-date (Default Risk Day)",
+    "countdown": "Days to X-date",
+    "sentiment": "Sentiment Index",
+    "risk": "Risk Level",
+    "delta": "Daily Delta",
+    "limit_hit": "Debt Limit Hit",
+    "final_vote": "Final Vote (Est.)",
+    "vix": "VIX Fear Index",
+    "vix_level": "Fear Level"
+  },
+  "risk": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "extreme": "Extreme"
+  },
+  "market": {
+    "pre_vote": "Pre-Vote 15 Days",
+    "post_vote": "Post-Vote 15 Days",
+    "cumulative": "Cumulative Return Band",
+    "spx": "S&P 500",
+    "tlt": "TLT (Bonds)",
+    "dgs10": "10Y Yield (bps)",
+    "vix": "VIX",
+    "vix_chart": "VIX History"
+  },
+  "weights": {
+    "mode": "Weight Mode",
+    "auto": "Auto",
+    "manual": "Manual",
+    "hybrid": "Hybrid",
+    "blend": "User Override Blend",
+    "historical": "Historical KNN",
+    "sentiment": "Sentiment",
+    "microstructure": "Microstructure",
+    "reset": "Reset to Default",
+    "lock": "Lock Weights",
+    "evolution": "Weight Evolution"
+  },
+  "disclaimer": {
+    "en": "This tool provides statistical model forecasts, not investment advice.",
+    "zh": "本工具为统计模型预测，非投资建议。"
+  },
+  "common": {
+    "run_update": "Run Daily Update",
+    "loading": "Loading data..."
+  }
+}
