@@ -20,6 +20,17 @@ def _download(ticker: str, period: str = "6mo") -> pd.DataFrame:
     return df
 
 
+def download_range(ticker: str, start: str, end: str) -> pd.DataFrame:
+    """Download OHLC for a specific calendar date range."""
+    with _lock:
+        df = yf.download(ticker, start=start, end=end, progress=False, auto_adjust=True)
+    if df.empty:
+        return df
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+    return df
+
+
 def get_latest_prices() -> dict:
     out = {}
     for key, ticker in TICKERS.items():
@@ -46,18 +57,6 @@ def get_history(ticker_key: str, days: int = 180) -> pd.DataFrame:
         return df
     cutoff = datetime.now() - timedelta(days=days)
     df = df[df.index >= pd.Timestamp(cutoff)]
-    return df
-
-
-
-def download_range(ticker: str, start: str, end: str) -> pd.DataFrame:
-    """Download OHLC for a specific calendar date range."""
-    with _lock:
-        df = yf.download(ticker, start=start, end=end, progress=False, auto_adjust=True)
-    if df.empty:
-        return df
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = df.columns.get_level_values(0)
     return df
 
 

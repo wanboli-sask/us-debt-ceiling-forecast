@@ -13,7 +13,6 @@ import requests
 from config import BASE_DIR, DAILY_DEFICIT_DOLLARS, DEFAULT_WEIGHTS, MARKET_WINDOW_DAYS
 from models.market_model import forecast_market
 from models.weight_learner import hedge_update
-from services.market_client import download_range
 
 BACKTEST_2023 = {
     "limit_hit_date": "2023-01-19",
@@ -119,13 +118,19 @@ def backtest_xdate() -> dict:
     }
 
 
+def _download_range(ticker: str, start: str, end: str) -> pd.DataFrame:
+    from services.market_client import download_range
+
+    return download_range(ticker, start, end)
+
+
 def _actual_daily_path(vote_date: str, window: int = 15) -> dict:
     center = pd.Timestamp(vote_date)
     start = (center - timedelta(days=window + 5)).strftime("%Y-%m-%d")
     end = (center + timedelta(days=window + 5)).strftime("%Y-%m-%d")
 
-    spx = download_range("^GSPC", start, end)["Close"].dropna()
-    vix = download_range("^VIX", start, end)["Close"].dropna()
+    spx = _download_range("^GSPC", start, end)["Close"].dropna()
+    vix = _download_range("^VIX", start, end)["Close"].dropna()
 
     def cum_path(close: pd.Series) -> list:
         rows = []
@@ -208,7 +213,7 @@ def backtest_weights() -> dict:
     vote = pd.Timestamp(BACKTEST_2023["vote_date"])
     start = (vote - timedelta(days=45)).strftime("%Y-%m-%d")
     end = (vote + timedelta(days=15)).strftime("%Y-%m-%d")
-    spx = download_range("^GSPC", start, end)["Close"].dropna()
+    spx = _download_range("^GSPC", start, end)["Close"].dropna()
     if spx.empty or len(spx) < 10:
         return {"history": [], "final_weights": DEFAULT_WEIGHTS}
 

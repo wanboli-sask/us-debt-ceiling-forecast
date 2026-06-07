@@ -88,15 +88,11 @@ def page_overview(data):
     c7.metric(bl("Debt (T)", "债务(万亿)"), f"${data['debt'].get('debt_trillions', 0):.3f}T")
     c8.metric(bl("Headroom (B)", "剩余额度(十亿)"), f"${data['debt'].get('headroom_billions', 0):.0f}B")
 
-    st.info(
-        bl(
-            f"X-date range: {x['x_date_p10']} ~ {x['x_date_p90']}",
-            f"X-date区间: {x['x_date_p10']} ~ {x['x_date_p90']}",
-        )
-    )
+    date_range = f"{x['x_date_p10']} ~ {x['x_date_p90']}"
+    st.info(f"{bl('X-date range', 'X-date区间')}： {date_range}")
 
     st.divider()
-    st.subheader(bl("VIX Fear Index / 美股恐慌指数", "VIX Fear Index / 美股恐慌指数"))
+    st.subheader(t("overview.vix"))
     render_vix_overview(data.get("vix", {}))
     render_vix_chart(data.get("vix", {}))
 

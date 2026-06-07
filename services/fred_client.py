@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import datetime, timedelta
 
 import pandas as pd
@@ -13,6 +14,15 @@ from config import BASE_DIR
 
 load_dotenv(BASE_DIR / ".env")
 
+FRED_KEY_URL = "https://fred.stlouisfed.org/docs/api/api_key.html"
+FRED_KEY_PATTERN = re.compile(r"^[a-z0-9]{32}$")
+FRED_PLACEHOLDER_KEYS = {
+    "your_fred_api_key_here",
+    "your_32_char_key",
+    "your_32_char_key_here",
+    "paste_your_key_here",
+}
+
 FRED_SERIES = {
     "tga": "WTREGEN",
     "dgs10": "DGS10",
@@ -20,13 +30,62 @@ FRED_SERIES = {
 }
 
 
+def _read_fred_key() -> str:
+    return os.getenv("FRED_API_KEY", "").strip()
+
+
+def _is_valid_fred_key(key: str) -> bool:
+    return bool(key) and bool(FRED_KEY_PATTERN.match(key))
+
+
+def _fred_key_state() -> tuple[str | None, str]:
+    """Return (usable_key_or_none, state) where state is missing|placeholder|invalid|valid."""
+    key = _read_fred_key()
+    if not key:
+        return None, "missing"
+    if key.lower() in FRED_PLACEHOLDER_KEYS:
+        return None, "placeholder"
+    if not _is_valid_fred_key(key):
+        return None, "invalid"
+    return key, "valid"
+
+
 def get_fred_status() -> dict:
-    key = os.getenv("FRED_API_KEY", "").strip()
-    configured = bool(key)
+    key, state = _fred_key_state()
     connected = False
-    message_en = "FRED API key not configured — using fallback values."
-    message_zh = "未配置 FRED API 密钥 — 使用默认值。"
-    if not configured:
+    if state == "missing":
+        message_en = "FRED API key not configured — using fallback values."
+        message_zh = "未配置 FRED API 密钥 — 使用默认值。"
+        return {
+            "configured": False,
+            "connected": False,
+            "message_en": message_en,
+            "message_zh": message_zh,
+        }
+    if state == "placeholder":
+        message_en = (
+            "FRED API key is still a placeholder. Register for a free 32-character key at "
+            f"{FRED_KEY_URL} and set FRED_API_KEY in .env — using fallback values."
+        )
+        message_zh = (
+            "FRED API 密钥仍为占位符。请在 "
+            f"{FRED_KEY_URL} 免费注册获取 32 位密钥并写入 .env — 当前使用默认值。"
+        )
+        return {
+            "configured": False,
+            "connected": False,
+            "message_en": message_en,
+            "message_zh": message_zh,
+        }
+    if state == "invalid":
+        message_en = (
+            "FRED API key must be a 32-character lowercase alphanumeric string. "
+            f"Get one at {FRED_KEY_URL} — using fallback values."
+        )
+        message_zh = (
+            "FRED API 密钥须为 32 位小写字母数字。请在 "
+            f"{FRED_KEY_URL} 获取 — 当前使用默认值。"
+        )
         return {
             "configured": False,
             "connected": False,
@@ -47,7 +106,7 @@ def get_fred_status() -> dict:
         message_en = f"FRED API error: {exc}"
         message_zh = f"FRED API 错误: {exc}"
     return {
-        "configured": configured,
+        "configured": True,
         "connected": connected,
         "message_en": message_en,
         "message_zh": message_zh,
@@ -55,8 +114,8 @@ def get_fred_status() -> dict:
 
 
 def _get_fred():
-    key = os.getenv("FRED_API_KEY", "").strip()
-    if Fred and key:
+    key, state = _fred_key_state()
+    if Fred and state == "valid" and key:
         return Fred(api_key=key)
     return None
 
