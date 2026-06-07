@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 import streamlit as st
 
+from components.theme import style_figure
 from i18n.bilingual import bl, t
 
 
@@ -43,15 +44,15 @@ def render_vix_chart(vix: dict):
         (30, "Elevated (30)", "升高(30)"),
         (40, "High fear (40)", "高恐慌(40)"),
     ]:
-        fig.add_hline(y=level, line_dash="dot", line_color="#bdc3c7",
+        fig.add_hline(y=level, line_dash="dot", line_color="#52525b",
                       annotation_text=bl(label_en, label_zh))
     fig.update_layout(
         title=bl("VIX Fear Index — 90 Day History", "VIX恐慌指数 — 近90日走势"),
         xaxis_title=bl("Date", "日期"),
         yaxis_title=bl("VIX Level", "VIX水平"),
-        height=380, showlegend=False,
+        showlegend=False,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig, height=380), use_container_width=True)
 
 
 def render_vix_forecast(market: dict, vix: dict):
@@ -78,9 +79,8 @@ def render_vix_forecast(market: dict, vix: dict):
         title=bl("VIX Forecast ±15 Days Around Vote", "投票前后半个月VIX预测"),
         xaxis_title=bl("Days from Vote", "距投票日天数"),
         yaxis_title=bl("VIX Level", "VIX水平"),
-        height=380,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig, height=380), use_container_width=True)
 
     fused = market.get("fused_cumulative", {})
     pre_vix = fused.get("pre", {}).get("vix", 0)

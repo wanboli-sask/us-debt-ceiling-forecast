@@ -1,0 +1,23 @@
+{
+  "updated_at": "2026-06-07T17:57:51+00:00",
+  "source": "unitedstates/congress-legislators",
+  "congress": 119,
+  "senate": {
+    "total": 100,
+    "majority": "Republican",
+    "parties": {
+      "Democrat": 45,
+      "Independent": 2,
+      "Republican": 53
+    }
+  },
+  "house": {
+    "total": 436,
+    "majority": "Republican",
+    "parties": {
+      "Republican": 220,
+      "Democrat": 215,
+      "Independent": 1
+    }
+  }
+}

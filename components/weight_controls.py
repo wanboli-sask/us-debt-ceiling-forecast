@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from components.theme import style_figure
 from config import DEFAULT_WEIGHTS
 from db.database import get_weight_history
 from i18n.bilingual import bl, t
@@ -79,6 +80,6 @@ def render_weight_controls():
             y=["w_historical", "w_sentiment", "w_microstructure"],
             title=bl("AI Weight Evolution", "AI权重演变"),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(style_figure(fig, height=360), use_container_width=True)
 
     return resolved

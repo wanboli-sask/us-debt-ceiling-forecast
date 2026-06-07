@@ -9,9 +9,18 @@ from components.market_chart import render_market_forecast
 from components.timeline import render_timeline
 from components.vix_panel import render_vix_chart, render_vix_overview
 from components.backtest_panel import render_backtest_panel
+from components.congress_panel import render_congress_panel
 from components.weight_controls import render_weight_controls
+from components.theme import (
+    inject_global_styles,
+    render_disclaimer_block,
+    render_page_header,
+    render_sidebar_brand,
+    render_sidebar_nav_label,
+    render_theme_selector,
+)
 from config import BASE_DIR
-from db.database import get_snapshots, init_db
+from db.database import init_db
 from i18n.bilingual import bl, t
 from jobs.daily_update import run_daily_update
 from models.market_model import forecast_market
@@ -27,6 +36,7 @@ st.set_page_config(
     page_title="US Debt Ceiling Forecast / 美国债务上限预测",
     page_icon="🏛️",
     layout="wide",
+    initial_sidebar_state="expanded",
 )
 
 init_db()
@@ -63,14 +73,11 @@ def load_forecast(deficit_mult=1.0, em_billions=500.0):
     }
 
 
-def render_disclaimer():
-    st.divider()
-    st.caption(t("disclaimer.en"))
-    st.caption(t("disclaimer.zh"))
-
-
 def page_overview(data):
-    st.header(t("nav.overview"))
+    render_page_header(
+        t("nav.overview"),
+        bl("Key indicators for the 2027 debt ceiling cycle", "2027 年债务上限周期关键指标"),
+    )
     x = data["xdate"]
     c1, c2, c3, c4 = st.columns(4)
     xdate_dt = datetime.strptime(x["x_date_p50"], "%Y-%m-%d").date()
@@ -81,26 +88,6 @@ def page_overview(data):
     risk_map = {"low": t("risk.low"), "medium": t("risk.medium"),
                 "high": t("risk.high"), "extreme": t("risk.extreme")}
     c4.metric(t("overview.risk"), risk_map.get(x["risk_level"], x["risk_level"]))
-
-    st.markdown(
-        """
-        <style>
-        [data-testid="stMetric"] [data-testid="stTooltipIcon"] {
-            color: #e65100 !important;
-            background: rgba(255, 152, 0, 0.15);
-            border-radius: 999px;
-            padding: 0.12rem;
-            margin-left: 0.1rem;
-            vertical-align: middle;
-        }
-        [data-testid="stMetric"] [data-testid="stTooltipIcon"] svg {
-            width: 1rem !important;
-            height: 1rem !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
 
     c5, c6, c7, c8 = st.columns(4)
     debt = data["debt"]
@@ -114,14 +101,17 @@ def page_overview(data):
     date_range = f"{x['x_date_p10']} ~ {x['x_date_p90']}"
     st.info(f"{bl('X-date range', 'X-date区间')}： {date_range}")
 
-    st.divider()
+    st.markdown("---")
     st.subheader(t("overview.vix"))
     render_vix_overview(data.get("vix", {}))
     render_vix_chart(data.get("vix", {}))
 
 
 def page_scenario():
-    st.header(t("nav.scenario"))
+    render_page_header(
+        t("nav.scenario"),
+        bl("Stress-test assumptions for deficit and extraordinary measures", "调整赤字与非常规措施假设进行压力测试"),
+    )
     deficit = st.slider(bl("Deficit multiplier", "赤字倍数"), 0.5, 2.0, 1.0, 0.05)
     em = st.slider(bl("EM headroom (B)", "非常规措施额度(十亿)"), 200, 800, 500, 10)
     default_days = st.slider(bl("Default scenario (days)", "违约情景(天)"), 0, 14, 0)
@@ -136,7 +126,10 @@ def page_scenario():
 
 
 def page_history():
-    st.header(t("nav.history"))
+    render_page_header(
+        t("nav.history"),
+        bl("Debt-limit episodes from 2002–2025 with market reactions", "2002–2025 年债务上限事件与市场反应"),
+    )
     hist_path = BASE_DIR / "data" / "historical_votes.json"
     with open(hist_path) as f:
         cases = json.load(f)
@@ -172,8 +165,9 @@ def page_history():
 
 
 # Sidebar
-st.sidebar.title(t("app.title"))
-st.sidebar.caption(t("app.subtitle"))
+render_sidebar_brand()
+render_theme_selector()
+inject_global_styles()
 _fred = get_fred_status()
 if not _fred.get("connected"):
     st.sidebar.warning(bl(_fred["message_en"], _fred["message_zh"]))
@@ -186,6 +180,7 @@ if st.sidebar.button(t("common.run_update")):
         st.session_state.forecast = load_forecast()
     st.sidebar.success(bl("Update complete", "更新完成"))
 
+render_sidebar_nav_label()
 pages = {
     "overview": t("nav.overview"),
     "timeline": t("nav.timeline"),
@@ -194,9 +189,15 @@ pages = {
     "scenario": t("nav.scenario"),
     "weights": t("nav.weights"),
     "history": t("nav.history"),
+    "congress": t("nav.congress"),
     "backtest": t("nav.backtest"),
 }
-page = st.sidebar.radio(bl("Navigation", "导航"), list(pages.keys()), format_func=lambda k: pages[k])
+page = st.sidebar.radio(
+    "nav",
+    list(pages.keys()),
+    format_func=lambda k: pages[k],
+    label_visibility="collapsed",
+)
 
 if st.session_state.forecast is None:
     with st.spinner(t("common.loading")):
@@ -207,23 +208,44 @@ data = st.session_state.forecast
 if page == "overview":
     page_overview(data)
 elif page == "timeline":
-    st.header(t("nav.timeline"))
+    render_page_header(
+        t("nav.timeline"),
+        bl("2027 vote windows and milestone dates", "2027 年投票窗口与关键节点"),
+    )
     render_timeline()
 elif page == "market":
-    st.header(t("nav.market"))
+    render_page_header(
+        t("nav.market"),
+        bl("±15-day market impact around the final vote", "最终投票前后半个月市场冲击"),
+    )
     render_market_forecast(data["market"], data.get("vix"))
 elif page == "daily":
-    st.header(t("nav.daily"))
+    render_page_header(
+        t("nav.daily"),
+        bl("Historical snapshots from the daily update pipeline", "每日更新流水线历史快照"),
+    )
     render_daily_report()
 elif page == "scenario":
     page_scenario()
 elif page == "weights":
-    st.header(t("nav.weights"))
+    render_page_header(
+        t("nav.weights"),
+        bl("AI adaptive weights with manual override", "AI 自适应权重与手动覆盖"),
+    )
     render_weight_controls()
 elif page == "history":
     page_history()
+elif page == "congress":
+    render_page_header(
+        t("nav.congress"),
+        bl("Current party seat counts in the Senate and House", "参议院与众议院当前党派席位分布"),
+    )
+    render_congress_panel()
 elif page == "backtest":
-    st.header(t("nav.backtest"))
+    render_page_header(
+        t("nav.backtest"),
+        bl("Validation against the 2023 debt-ceiling episode", "以 2023 年债务上限事件进行回测验证"),
+    )
     render_backtest_panel()
 
-render_disclaimer()
+render_disclaimer_block()

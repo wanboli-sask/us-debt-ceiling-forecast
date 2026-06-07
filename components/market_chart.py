@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 import streamlit as st
 
+from components.theme import style_figure
 from components.vix_panel import render_vix_forecast
 from i18n.bilingual import bl, t
 
@@ -15,17 +16,16 @@ def render_market_forecast(market: dict, vix: dict = None):
     fig.add_trace(go.Scatter(
         x=all_days, y=spx, mode="lines+markers",
         name=bl("SPX Daily Path (%)", "标普500逐日路径(%)"),
-        line=dict(color="#2980b9"),
+        line=dict(color="#10a37f", width=2.5),
     ))
-    fig.add_vline(x=0, line_dash="dash", line_color="red",
+    fig.add_vline(x=0, line_dash="dash", line_color="#a1a1aa",
                   annotation_text=bl("Vote Day", "投票日"))
     fig.update_layout(
         title=bl("±15-Day Market Forecast Around Vote", "投票前后半个月市场预测"),
         xaxis_title=bl("Days from Vote", "距投票日天数"),
         yaxis_title=bl("Cumulative SPX Return (%)", "标普500累计收益(%)"),
-        height=420,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig, height=420), use_container_width=True)
 
     bands = market.get("cumulative_bands", {})
     col1, col2 = st.columns(2)

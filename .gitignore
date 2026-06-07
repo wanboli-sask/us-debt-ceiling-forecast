@@ -4,5 +4,5 @@ __pycache__/
 .env
 db/forecast.db
 .DS_Store
-.streamlit/
+.streamlit/secrets.toml
 logs/

@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from components.theme import style_figure
 from db.database import get_snapshots
 from i18n.bilingual import bl
 
@@ -19,7 +20,7 @@ def render_daily_report():
         df, x="snapshot_date", y="sentiment_score",
         title=bl("Sentiment Index (30 days)", "情绪指数（30日）"),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig, height=360), use_container_width=True)
 
     if "vix_close" in df.columns and df["vix_close"].notna().any():
         fig_vix = px.line(
@@ -28,14 +29,14 @@ def render_daily_report():
         )
         fig_vix.add_hline(y=30, line_dash="dash",
                           annotation_text=bl("Elevated", "升高"))
-        st.plotly_chart(fig_vix, use_container_width=True)
+        st.plotly_chart(style_figure(fig_vix, height=360), use_container_width=True)
 
     if "x_date_estimate" in df.columns:
         fig2 = px.line(
             df, x="snapshot_date", y="debt_trillions",
             title=bl("Federal Debt (Trillions)", "联邦债务（万亿）"),
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(style_figure(fig2, height=360), use_container_width=True)
 
     st.dataframe(df[[
         "snapshot_date", "debt_trillions", "x_date_estimate",

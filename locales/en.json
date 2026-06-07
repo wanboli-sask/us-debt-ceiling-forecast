@@ -11,6 +11,7 @@
     "scenario": "Scenario Simulator",
     "weights": "Model Weights",
     "history": "Historical Cases",
+    "congress": "Congress Composition",
     "backtest": "Backtest Validation"
   },
   "overview": {
@@ -56,6 +57,10 @@
   "disclaimer": {
     "en": "This tool provides statistical model forecasts, not investment advice.",
     "zh": "本工具为统计模型预测，非投资建议。"
+  },
+  "congress": {
+    "senate": "US Senate",
+    "house": "US House of Representatives"
   },
   "common": {
     "run_update": "Run Daily Update",

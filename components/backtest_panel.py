@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+from components.theme import style_figure
 from config import BASE_DIR
 from i18n.bilingual import bl, t
 from models.backtest import run_backtest_2023
@@ -51,8 +52,8 @@ def render_backtest_panel():
         fig1.add_trace(go.Scatter(x=df["date"], y=df["x_date_pred"], name=bl("Predicted X-date", "预测X-date"), mode="lines+markers"))
         fig1.add_hline(y=constants.get("x_date_actual"), line_dash="dash", line_color="red",
                        annotation_text=bl("Actual X-date", "实际X-date"))
-        fig1.update_layout(height=360, yaxis_title=bl("Date", "日期"))
-        st.plotly_chart(fig1, use_container_width=True)
+        fig1.update_layout(yaxis_title=bl("Date", "日期"))
+        st.plotly_chart(style_figure(fig1, height=360), use_container_width=True)
 
     # Chart 2: SPX pred vs actual
     st.subheader(bl("SPX ±15d: Predicted vs Actual", "标普±15日: 预测 vs 实际"))
@@ -66,8 +67,11 @@ def render_backtest_panel():
         fig2.add_trace(go.Scatter(x=pdf["day_offset"], y=pdf["spx"]*100, name=bl("Predicted", "预测"), mode="lines"))
         fig2.add_trace(go.Scatter(x=adf["day_offset"], y=adf["cumulative_return"]*100, name=bl("Actual", "实际"), mode="lines"))
         fig2.add_vline(x=0, line_dash="dash", line_color="red")
-        fig2.update_layout(height=360, xaxis_title=bl("Days from vote", "距投票日"), yaxis_title=bl("SPX cumulative %", "标普累计%"))
-        st.plotly_chart(fig2, use_container_width=True)
+        fig2.update_layout(
+            xaxis_title=bl("Days from vote", "距投票日"),
+            yaxis_title=bl("SPX cumulative %", "标普累计%"),
+        )
+        st.plotly_chart(style_figure(fig2, height=360), use_container_width=True)
 
     # Chart 3: VIX
     st.subheader(bl("VIX Around Vote (Actual)", "投票前后VIX（实际）"))
@@ -77,8 +81,8 @@ def render_backtest_panel():
         fig3 = go.Figure()
         fig3.add_trace(go.Scatter(x=vdf["day_offset"], y=vdf["level"], name="VIX", line=dict(color="#e74c3c")))
         fig3.add_vline(x=0, line_dash="dash", line_color="red")
-        fig3.update_layout(height=320, xaxis_title=bl("Days from vote", "距投票日"), yaxis_title="VIX")
-        st.plotly_chart(fig3, use_container_width=True)
+        fig3.update_layout(xaxis_title=bl("Days from vote", "距投票日"), yaxis_title="VIX")
+        st.plotly_chart(style_figure(fig3, height=320), use_container_width=True)
 
     # Chart 4: Weight evolution
     st.subheader(bl("AI Weight Learning Simulation", "AI权重学习模拟"))
@@ -88,8 +92,8 @@ def render_backtest_panel():
         fig4 = go.Figure()
         for col, label in [("w_historical", bl("Historical", "历史")), ("w_sentiment", bl("Sentiment", "情绪")), ("w_microstructure", bl("Micro", "微观"))]:
             fig4.add_trace(go.Scatter(x=wdf["date"], y=wdf[col], name=label, mode="lines"))
-        fig4.update_layout(height=360, yaxis_title=bl("Weight", "权重"))
-        st.plotly_chart(fig4, use_container_width=True)
+        fig4.update_layout(yaxis_title=bl("Weight", "权重"))
+        st.plotly_chart(style_figure(fig4, height=360), use_container_width=True)
 
     fw = report.get("weights", {}).get("final_weights", {})
     st.caption(bl(

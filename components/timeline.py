@@ -5,6 +5,7 @@ from pathlib import Path
 import plotly.graph_objects as go
 import streamlit as st
 
+from components.theme import style_figure
 from config import BASE_DIR
 from i18n.bilingual import bl, t
 
@@ -44,10 +45,9 @@ def render_timeline():
         title=bl("2027 Debt Ceiling Timeline", "2027年债务上限时间线"),
         xaxis_title=bl("Date", "日期"),
         yaxis=dict(showticklabels=False),
-        height=400,
         showlegend=True,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig, height=400), use_container_width=True)
 
     for w in baseline.get("vote_windows", []):
         st.markdown(

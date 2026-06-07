@@ -11,6 +11,7 @@
     "scenario": "情景模拟",
     "weights": "模型权重",
     "history": "历史对照",
+    "congress": "国会席位",
     "backtest": "回测验证"
   },
   "overview": {
@@ -56,6 +57,10 @@
   "disclaimer": {
     "en": "This tool provides statistical model forecasts, not investment advice.",
     "zh": "本工具为统计模型预测，非投资建议。"
+  },
+  "congress": {
+    "senate": "美国参议院",
+    "house": "美国众议院"
   },
   "common": {
     "run_update": "运行每日更新",

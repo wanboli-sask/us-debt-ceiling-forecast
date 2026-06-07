@@ -11,6 +11,7 @@ from models.vote_model import get_vote_forecast
 from services.fred_client import fetch_fred_bundle
 from services.market_client import get_latest_prices
 from services.news_sentiment import get_sentiment_summary
+from services.congress_client import refresh_congress_composition
 from services.treasury_client import fetch_cash_balance, fetch_latest_debt
 
 LOG_FILE = LOG_DIR / "daily_update.log"
@@ -41,6 +42,17 @@ def run_daily_update(deficit_multiplier: float = 1.0) -> dict:
         prices.setdefault("vix", {})["close"] = fred["vix"]
 
     sentiment = get_sentiment_summary()
+
+    try:
+        congress = refresh_congress_composition()
+        log.info(
+            "Congress seats updated: Senate=%s House=%s",
+            congress.get("senate", {}).get("parties"),
+            congress.get("house", {}).get("parties"),
+        )
+    except Exception as exc:
+        congress = None
+        log.warning("Congress seat update failed: %s", exc)
 
     treasury_cash = cash.get("cash_billions")
     cash_billions = tga
@@ -153,6 +165,7 @@ def run_daily_update(deficit_multiplier: float = 1.0) -> dict:
         "delta": delta,
         "alerts": alerts,
         "weight_record": weight_record,
+        "congress": congress,
     }
     log.info("Daily update complete. FRED connected=%s", fred_status.get("connected"))
     return result
