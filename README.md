@@ -97,21 +97,56 @@ Open http://localhost:8501 in your browser.
 
 ### FRED API key (recommended)
 
-1. Register a free key at https://fred.stlouisfed.org/docs/api/api_key.html
-2. Copy the example env file and paste your 32-character key:
+FRED provides free macro data used by this dashboard (TGA balance, Treasury yields, VIX). A personal API key is required for live values.
+
+#### How to apply
+
+1. Create a free account at [FRED](https://fredaccount.stlouisfed.org) (or sign in if you already have one).
+2. Open the API key page: https://fred.stlouisfed.org/docs/api/api_key.html  
+   Direct account link: https://fredaccount.stlouisfed.org/apikeys
+3. Click **Request API Key** and fill in the form.
+4. When asked to describe your application, you can paste something like:
+
+> **Application name:** US Debt Ceiling Forecast  
+> **Purpose:** A personal, open-source Streamlit dashboard for **non-commercial research and education** on the U.S. debt-ceiling cycle (X-date, vote windows, market context). Not investment advice.  
+> **FRED series used:** `WTREGEN` (Treasury General Account), `DGS2` / `DGS5` / `DGS10` / `DGS30` (constant-maturity Treasury yields), and `VIXCLS` (volatility index) for daily charts and modeling inputs.  
+> **Usage:** Low-frequency personal use (roughly daily updates and occasional manual refreshes).
+
+5. Submit the form and copy the **32-character lowercase alphanumeric** key.
+
+#### Configure the project
 
 ```bash
 cp .env.example .env
-# Edit .env: FRED_API_KEY=your_32_char_key
 ```
 
-3. Verify the pipeline:
+Edit `.env` (do **not** commit this file):
+
+```bash
+FRED_API_KEY=your32characterlowercasekeyhere
+```
+
+Rules:
+
+- Exactly **32** characters, **lowercase letters and digits only**
+- No quotes, no spaces around `=`
+- Do **not** use placeholder text such as `your_fred_api_key_here`
+
+#### Verify
+
+Restart Streamlit, then check the sidebar for **FRED API connected**, or run:
 
 ```bash
 python scripts/verify_daily_update.py
 ```
 
-Without a valid key, TGA and DGS10 fall back to default values and the sidebar shows a warning. The app still runs using Treasury and yfinance data.
+#### Security & sharing
+
+- `.env` is listed in `.gitignore` — **never** commit or push your key to GitHub.
+- For local/personal use, one key on your machine is fine.
+- If you deploy a public instance for many users, prefer server-side caching (daily update) and consider FRED’s terms: each end user should ideally use their own key for public apps.
+
+Without a valid key, TGA and Treasury yields fall back to default values and the sidebar shows a warning. The app still runs using Treasury Fiscal Data and yfinance.
 
 ## Daily update pipeline
 
@@ -258,21 +293,56 @@ streamlit run app.py
 
 ### FRED API 密钥（推荐）
 
-1. 在 https://fred.stlouisfed.org/docs/api/api_key.html 免费注册
-2. 复制环境变量模板并填入 32 位密钥：
+FRED 提供免费宏观数据，本项目用于财政部一般账户（TGA）、国债收益率曲线和 VIX 等。要显示实时数据，需要申请个人 API 密钥。
+
+#### 如何申请
+
+1. 在 [FRED 账户](https://fredaccount.stlouisfed.org) 免费注册（或登录已有账户）。
+2. 打开 API 密钥页面：https://fred.stlouisfed.org/docs/api/api_key.html  
+   账户直达链接：https://fredaccount.stlouisfed.org/apikeys
+3. 点击 **Request API Key**，填写申请表。
+4. 在「描述你将开发的应用程序」一栏，可参考粘贴：
+
+> **应用名称：** US Debt Ceiling Forecast（美国债务上限预测）  
+> **用途：** 开源 Streamlit 仪表盘，用于**非商业研究与教育**，展示美国债务上限周期（X-date、投票窗口、市场背景），不构成投资建议。  
+> **使用的 FRED 序列：** `WTREGEN`（财政部一般账户）、`DGS2` / `DGS5` / `DGS10` / `DGS30`（国债恒定到期收益率）、`VIXCLS`（波动率指数），用于每日图表与模型输入。  
+> **调用频率：** 个人低频使用（约每日更新及偶尔手动刷新）。
+
+5. 提交后复制 **32 位小写字母与数字** 组成的密钥。
+
+#### 配置项目
 
 ```bash
 cp .env.example .env
-# 编辑 .env：FRED_API_KEY=your_32_char_key
 ```
 
-3. 验证流水线：
+编辑 `.env`（**切勿**提交到 Git）：
+
+```bash
+FRED_API_KEY=your32characterlowercasekeyhere
+```
+
+注意：
+
+- 必须为 **32 位**、**仅小写字母和数字**
+- 等号两侧不要加引号或空格
+- 不要使用 `your_fred_api_key_here` 等占位符
+
+#### 验证
+
+重启 Streamlit 后，侧边栏应显示 **FRED API 已连接**；或运行：
 
 ```bash
 python scripts/verify_daily_update.py
 ```
 
-未配置有效密钥时，TGA 和 DGS10 将使用回退默认值，侧边栏会显示警告。应用仍可借助财政部和 yfinance 数据正常运行。
+#### 安全与共用
+
+- `.env` 已在 `.gitignore` 中，**请勿**将密钥提交或推送到 GitHub。
+- 仅本机个人使用时，一个密钥即可。
+- 若对外公开部署、多人访问，建议使用服务端缓存（每日更新），并留意 FRED 条款：公开应用宜让每位最终用户使用自己的密钥。
+
+未配置有效密钥时，TGA 和国债收益率将使用回退默认值，侧边栏会显示警告。应用仍可借助财政部财政数据和 yfinance 正常运行。
 
 ## 每日更新流水线
 
