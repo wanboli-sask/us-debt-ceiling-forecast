@@ -12,6 +12,7 @@
     "weights": "模型权重",
     "history": "历史对照",
     "congress": "国会席位",
+    "yields": "美债收益率",
     "backtest": "回测验证"
   },
   "overview": {
@@ -38,6 +39,7 @@
     "spx": "标普500",
     "tlt": "美债ETF",
     "dgs10": "10年期收益率(bps)",
+    "dgs10_vote_forecast": "投票前后10年期收益率",
     "vix": "恐慌指数",
     "vix_chart": "VIX走势"
   },

@@ -10,6 +10,7 @@ from components.timeline import render_timeline
 from components.vix_panel import render_vix_chart, render_vix_overview
 from components.backtest_panel import render_backtest_panel
 from components.congress_panel import render_congress_panel
+from components.yields_panel import render_yields_panel
 from components.weight_controls import render_weight_controls
 from components.theme import (
     inject_global_styles,
@@ -31,6 +32,7 @@ from services.fred_client import fetch_fred_bundle, get_fred_status
 from services.market_client import get_latest_prices, get_vix_summary
 from services.news_sentiment import get_sentiment_summary
 from services.treasury_client import fetch_cash_balance, fetch_latest_debt
+from services.yields_client import get_yields_summary
 
 st.set_page_config(
     page_title="US Debt Ceiling Forecast / 美国债务上限预测",
@@ -70,6 +72,7 @@ def load_forecast(deficit_mult=1.0, em_billions=500.0):
         "prices": prices, "xdate": xdate, "vote": get_vote_forecast(),
         "market": market, "fred": fred_bundle, "dgs10": fred_bundle["dgs10"],
         "vix": get_vix_summary(),
+        "yields": get_yields_summary(),
     }
 
 
@@ -190,6 +193,7 @@ pages = {
     "weights": t("nav.weights"),
     "history": t("nav.history"),
     "congress": t("nav.congress"),
+    "yields": t("nav.yields"),
     "backtest": t("nav.backtest"),
 }
 page = st.sidebar.radio(
@@ -218,7 +222,11 @@ elif page == "market":
         t("nav.market"),
         bl("±15-day market impact around the final vote", "最终投票前后半个月市场冲击"),
     )
-    render_market_forecast(data["market"], data.get("vix"))
+    render_market_forecast(
+        data["market"],
+        vix=data.get("vix"),
+        yields=data.get("yields"),
+    )
 elif page == "daily":
     render_page_header(
         t("nav.daily"),
@@ -241,6 +249,15 @@ elif page == "congress":
         bl("Current party seat counts in the Senate and House", "参议院与众议院当前党派席位分布"),
     )
     render_congress_panel()
+elif page == "yields":
+    render_page_header(
+        t("nav.yields"),
+        bl(
+            "US Treasury constant-maturity yields and curve spreads",
+            "美国国债恒定到期收益率与期限利差",
+        ),
+    )
+    render_yields_panel(data["yields"])
 elif page == "backtest":
     render_page_header(
         t("nav.backtest"),

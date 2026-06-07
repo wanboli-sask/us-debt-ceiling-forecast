@@ -31,6 +31,13 @@ def render_daily_report():
                           annotation_text=bl("Elevated", "升高"))
         st.plotly_chart(style_figure(fig_vix, height=360), use_container_width=True)
 
+    if "dgs10" in df.columns and df["dgs10"].notna().any():
+        fig_dgs10 = px.line(
+            df, x="snapshot_date", y="dgs10",
+            title=bl("10Y Treasury Yield (30 days)", "10年期美债收益率（30日）"),
+        )
+        st.plotly_chart(style_figure(fig_dgs10, height=360), use_container_width=True)
+
     if "x_date_estimate" in df.columns:
         fig2 = px.line(
             df, x="snapshot_date", y="debt_trillions",
@@ -40,5 +47,5 @@ def render_daily_report():
 
     st.dataframe(df[[
         "snapshot_date", "debt_trillions", "x_date_estimate",
-        "sentiment_score", "risk_level", "spx_close", "vix_close"
+        "sentiment_score", "risk_level", "spx_close", "vix_close", "dgs10"
     ]].sort_values("snapshot_date", ascending=False), use_container_width=True)

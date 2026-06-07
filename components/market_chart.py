@@ -3,10 +3,11 @@ import streamlit as st
 
 from components.theme import style_figure
 from components.vix_panel import render_vix_forecast
+from components.yields_panel import render_dgs10_forecast
 from i18n.bilingual import bl, t
 
 
-def render_market_forecast(market: dict, vix: dict = None):
+def render_market_forecast(market: dict, vix: dict = None, yields: dict = None):
     pre = market.get("pre_vote_15d", [])
     post = market.get("post_vote_15d", [])
     all_days = [p["day_offset"] for p in pre] + [p["day_offset"] for p in post]
@@ -45,3 +46,8 @@ def render_market_forecast(market: dict, vix: dict = None):
         st.divider()
         st.subheader(bl("VIX Fear Index Forecast", "VIX恐慌指数预测"))
         render_vix_forecast(market, vix)
+
+    if yields:
+        st.divider()
+        st.subheader(t("market.dgs10_vote_forecast"))
+        render_dgs10_forecast(market, yields)

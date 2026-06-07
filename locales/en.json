@@ -12,6 +12,7 @@
     "weights": "Model Weights",
     "history": "Historical Cases",
     "congress": "Congress Composition",
+    "yields": "Treasury Yields",
     "backtest": "Backtest Validation"
   },
   "overview": {
@@ -38,6 +39,7 @@
     "spx": "S&P 500",
     "tlt": "TLT (Bonds)",
     "dgs10": "10Y Yield (bps)",
+    "dgs10_vote_forecast": "10Y Yield Around Vote",
     "vix": "VIX",
     "vix_chart": "VIX History"
   },

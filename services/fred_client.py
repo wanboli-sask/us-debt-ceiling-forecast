@@ -25,7 +25,10 @@ FRED_PLACEHOLDER_KEYS = {
 
 FRED_SERIES = {
     "tga": "WTREGEN",
+    "dgs2": "DGS2",
+    "dgs5": "DGS5",
     "dgs10": "DGS10",
+    "dgs30": "DGS30",
     "vix": "VIXCLS",
 }
 
