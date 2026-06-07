@@ -82,11 +82,34 @@ def page_overview(data):
                 "high": t("risk.high"), "extreme": t("risk.extreme")}
     c4.metric(t("overview.risk"), risk_map.get(x["risk_level"], x["risk_level"]))
 
+    st.markdown(
+        """
+        <style>
+        [data-testid="stMetric"] [data-testid="stTooltipIcon"] {
+            color: #e65100 !important;
+            background: rgba(255, 152, 0, 0.15);
+            border-radius: 999px;
+            padding: 0.12rem;
+            margin-left: 0.1rem;
+            vertical-align: middle;
+        }
+        [data-testid="stMetric"] [data-testid="stTooltipIcon"] svg {
+            width: 1rem !important;
+            height: 1rem !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     c5, c6, c7, c8 = st.columns(4)
+    debt = data["debt"]
+    as_of = debt.get("record_date") or "—"
+    debt_help = bl(f"As of {as_of}", f"数据截至 {as_of}")
     c5.metric(t("overview.limit_hit"), x["limit_hit_date"])
     c6.metric(t("overview.final_vote"), data["vote"]["final_vote_date"])
-    c7.metric(bl("Debt (T)", "债务(万亿)"), f"${data['debt'].get('debt_trillions', 0):.3f}T")
-    c8.metric(bl("Headroom (B)", "剩余额度(十亿)"), f"${data['debt'].get('headroom_billions', 0):.0f}B")
+    c7.metric(bl("Debt (T)", "债务(万亿)"), f"${debt.get('debt_trillions', 0):.3f}T", help=debt_help)
+    c8.metric(bl("Headroom (B)", "剩余额度(十亿)"), f"${debt.get('headroom_billions', 0):.0f}B", help=debt_help)
 
     date_range = f"{x['x_date_p10']} ~ {x['x_date_p90']}"
     st.info(f"{bl('X-date range', 'X-date区间')}： {date_range}")
